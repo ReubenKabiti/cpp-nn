@@ -1,7 +1,7 @@
 
-add_executable(
-	nn
+add_library(
+	neural
 	main.cpp
 )
 
-target_include_directories(nn PUBLIC ../include)
+target_include_directories(neural PUBLIC ../include)
