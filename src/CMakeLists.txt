@@ -1,7 +1,7 @@
 
 add_library(
 	neural
-	main.cpp
+	Matrix.cpp
 )
 
 target_include_directories(neural PUBLIC ../include)

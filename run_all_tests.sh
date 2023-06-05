@@ -1,1 +1,1 @@
-.build/src/tests
+.build/tests/tests

@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.14)
 
 project(
 	nn
@@ -9,3 +9,4 @@ project(
 add_subdirectory(src)
 add_subdirectory(examples)
 add_subdirectory(tests)
+
