@@ -1,10 +1,12 @@
 #include "Matrix.h"
 #include <iostream>
 #include <string.h>
+#include <random>
 
 Matrix::Matrix(int nr, int nc)
 {
 	_entries = new double[nr * nc];
+	memset(_entries, 0, nr * nc);
 	_nr = nr;
 	_nc = nc;
 }
@@ -53,6 +55,71 @@ Matrix Matrix::operator*(const Matrix& mat) const
 	return out;
 }
 
+Matrix Matrix::operator+(const Matrix& mat) const
+{
+	Matrix out(_nr, _nc);
+	for (int i = 0; i < _nr; i++)
+	{
+		for (int j = 0; j < _nc; j++)
+		{
+			out.set(i, j, get(i, j) + mat.get(i, j));
+		}
+	}
+	return out;
+}
+
+Matrix Matrix::operator-(const Matrix& mat) const
+{
+	Matrix out(_nr, _nc);
+	for (int i = 0; i < _nr; i++)
+	{
+		for (int j = 0; j < _nc; j++)
+		{
+			out.set(i, j, get(i, j) - mat.get(i, j));
+		}
+	}
+	return out;
+}
+
+Matrix Matrix::operator*(double c) const
+{
+	Matrix out(_nr, _nc);
+	for (int i = 0; i < _nr * _nc; i++)
+	{
+		_entries[i] = _entries[i] * c;
+	}
+	return out;
+}
+
+Matrix Matrix::operator+(double c) const
+{
+	Matrix out(_nr, _nc);
+	for (int i = 0; i < _nr * _nc; i++)
+	{
+		_entries[i] = _entries[i] * c;
+	}
+	return out;
+}
+
+Matrix Matrix::operator-(double c) const
+{
+	Matrix out(_nr, _nc);
+	for (int i = 0; i < _nr * _nc; i++)
+	{
+		_entries[i] = _entries[i] * c;
+	}
+	return out;
+}
+
+Matrix Matrix::operator/(double c) const
+{
+	Matrix out(_nr, _nc);
+	for (int i = 0; i < _nr * _nc; i++)
+	{
+		_entries[i] = _entries[i] * c;
+	}
+	return out;
+}
 
 void Matrix::print()
 {
@@ -76,3 +143,31 @@ Matrix Matrix::forEach(const MatrixForEachCallback& callback)
 	return out;
 }
 
+Matrix Matrix::sample(int nr, int nc, double start, double end)
+{
+	Matrix out(nr, nc);
+	for (int i = 0; i < nr * nc; i++)
+	{
+		double t = drand48();
+		out._entries[i] = start * (1.0 - t) + end*t;
+	}
+	return out;
+}
+
+Matrix Matrix::transpose(const Matrix& mat)
+{
+	Matrix out(mat._nc, mat._nr);
+	for (int i = 0; i < mat._nr; i++)
+	{
+		for (int j = 0; j < mat._nc; j++)
+		{
+			out.set(j, i, mat.get(i, j));
+		}
+	}
+	return out;
+}
+
+Matrix Matrix::getTransposed()
+{
+	return transpose(*this);
+}

@@ -22,7 +22,6 @@ TEST(Matrices, MultiplyingTwoMatrices)
 	mat2.set(0, 1, 2);
 	mat2.set(1, 0, 6);
 	mat2.set(1, 1, 7);
-
 	auto res = mat1 * mat2;
 
 	ASSERT_EQ(res.get(0, 0), 16);

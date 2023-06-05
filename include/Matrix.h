@@ -26,11 +26,24 @@ public:
 	Matrix forEach(const MatrixForEachCallback& callback);
 
 	Matrix operator*(const Matrix& mat) const;
+	Matrix operator+(const Matrix& mat) const;
+	Matrix operator-(const Matrix& mat) const;
+
+	Matrix operator*(double c) const;
+	Matrix operator+(double c) const;
+	Matrix operator-(double c) const;
+	Matrix operator/(double c) const;
+
+	static Matrix sample(int nr, int nc, double start, double end);
+	static Matrix transpose(const Matrix& mat);
+	Matrix getTransposed();
 
 
 private:
 
 	double* _entries;
 	int _nr, _nc;
+
+	friend class MatrixForEachCallback;
 };
 
